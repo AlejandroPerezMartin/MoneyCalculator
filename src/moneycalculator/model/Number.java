@@ -49,6 +49,15 @@ public class Number {
         }
     }
 
+    public Number multiply(Number numberA, Number numberB) {
+        Number result = new Number(numberA.numerator * numberB.numerator, numberA.denominator * numberB.denominator);
+        return result;
+    }
+
+    public Number divide(Number numberA, Number numberB) {
+        return new Number(numberA.numerator * numberB.denominator, numberA.denominator * numberB.numerator);
+    }
+
     public Number minimoComunMultiplo(Number firstNumber, Number secondNumber) {
         return new Number(
                 firstNumber.numerator * secondNumber.denominator,
