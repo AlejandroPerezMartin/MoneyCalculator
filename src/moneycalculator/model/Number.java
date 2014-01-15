@@ -2,12 +2,13 @@ package moneycalculator.model;
 
 public class Number {
 
-    private long numerator;
-    private long denominator;
+    private int numerator;
+    private int denominator;
 
-    public Number(long numerator, long denominator) {
+    public Number(int numerator, int denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
+        reduce();
     }
 
     public Number(Number number) {
@@ -30,13 +31,14 @@ public class Number {
             denominator *= 10;
             numerator = (int) number;
         }
+        reduce();
     }
 
-    public long getNumerator() {
+    public int getNumerator() {
         return numerator;
     }
 
-    public long getDenominator() {
+    public int getDenominator() {
         return denominator;
     }
 
@@ -44,18 +46,24 @@ public class Number {
         if (this.denominator == number.denominator) {
             return new Number(numerator + number.numerator, number.denominator);
         } else {
-            return new Number(minimoComunMultiplo(this, number).numerator + minimoComunMultiplo(number, this).numerator,
+            return new Number(
+                    minimoComunMultiplo(this, number).numerator + minimoComunMultiplo(number, this).numerator,
                     minimoComunMultiplo(number, this).denominator);
         }
     }
 
     public Number multiply(Number numberA, Number numberB) {
         Number result = new Number(numberA.numerator * numberB.numerator, numberA.denominator * numberB.denominator);
+        result.reduce();
         return result;
     }
 
     public Number divide(Number numberA, Number numberB) {
         return new Number(numberA.numerator * numberB.denominator, numberA.denominator * numberB.numerator);
+    }
+
+    public int[] getPrimeNumbers() {
+        return new int[]{2, 3, 4, 5, 7, 11, 13, 17, 19, 23, 25};
     }
 
     public Number minimoComunMultiplo(Number firstNumber, Number secondNumber) {
@@ -64,24 +72,43 @@ public class Number {
                 firstNumber.denominator * secondNumber.denominator);
     }
 
-    private void reduce() {
+    public boolean isDivisible(int number) {
+        return ((numerator % number == 0) & denominator % number == 0);
+    }
 
+    private void reduce() {
+        int[] primeNumber = getPrimeNumbers();
+        for (int Number : primeNumber) {
+            while (isDivisible(Number)) {
+                numerator = numerator / Number;
+                denominator = denominator / Number;
+            }
+        }
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object == null) {
+    public String toString() {
+        return numerator + " / " + denominator;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        if (object instanceof Number) {
-            return equals((Number) object);
+        if (getClass() != obj.getClass()) {
+            return false;
         }
 
-        return false;
-    }
+        final Number other = (Number) obj;
 
-    private boolean equals(Number number) {
-        return (numerator == number.numerator) && (denominator == number.denominator);
-    }
+        if (this.numerator != other.numerator) {
+            return false;
+        }
+        if (this.denominator != other.denominator) {
+            return false;
+        }
 
+        return true;
+    }
 }
