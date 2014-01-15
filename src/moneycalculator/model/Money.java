@@ -1,17 +1,21 @@
-
 package moneycalculator.model;
 
 public class Money {
 
-    private Number amount;
+    private final Number amount;
+    private final Currency currency;
 
-    public Money(Number amount) {
+    public Money(Number amount, Currency currency) {
         this.amount = amount;
+        this.currency = currency;
     }
 
     public Number getAmount() {
         return amount;
     }
-    
-    
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
 }

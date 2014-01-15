@@ -1,8 +1,7 @@
-
 package moneycalculator.model;
 
 public class Currency {
-    
+
     private final String code;
     private final String name;
     private final String symbol;
@@ -28,6 +27,5 @@ public class Currency {
     public String getSymbol() {
         return symbol;
     }
-    
 
 }
