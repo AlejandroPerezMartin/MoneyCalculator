@@ -1,5 +1,7 @@
 package moneycalculator.model;
 
+import java.util.Objects;
+
 public class Currency {
 
     private final String code;
@@ -16,6 +18,10 @@ public class Currency {
         this(code, name, "");
     }
 
+    public Currency(String code) {
+        this.code = code;
+    }
+
     public String getCode() {
         return code;
     }
@@ -26,6 +32,21 @@ public class Currency {
 
     public String getSymbol() {
         return symbol;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Currency other = (Currency) obj;
+        if (!Objects.equals(this.code, other.code)) {
+            return false;
+        }
+        return true;
     }
 
 }
