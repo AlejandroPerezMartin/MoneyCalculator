@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Currency {
 
     private final String code;
-    private final String name;
-    private final String symbol;
+    private String name;
+    private String symbol;
 
     public Currency(String code, String name, String symbol) {
         this.code = code;
@@ -15,7 +15,8 @@ public class Currency {
     }
 
     public Currency(String code, String name) {
-        this(code, name, "");
+        this.code = code;
+        this.name = name;
     }
 
     public Currency(String code) {

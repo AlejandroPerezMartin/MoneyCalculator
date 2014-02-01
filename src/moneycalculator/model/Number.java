@@ -111,4 +111,11 @@ public class Number {
 
         return true;
     }
+    
+    public static Number parseNumber(String value){
+        double parse = Double.parseDouble(value);
+        Number num = new Number(parse);
+        num.reduce();
+        return num;
+    }
 }
