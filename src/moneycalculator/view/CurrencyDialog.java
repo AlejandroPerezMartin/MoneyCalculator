@@ -1,6 +1,9 @@
-
 package moneycalculator.view;
 
-public class CurrencyDialog {
+import moneycalculator.model.Currency;
+
+public interface CurrencyDialog {
+
+    public Currency getCurrency();
     
 }

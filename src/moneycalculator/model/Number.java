@@ -47,12 +47,12 @@ public class Number {
             return new Number(numerator + number.numerator, number.denominator);
         } else {
             return new Number(
-                    minimoComunMultiplo(this, number).numerator + minimoComunMultiplo(number, this).numerator,
-                    minimoComunMultiplo(number, this).denominator);
+                    mcm(this, number).numerator + mcm(number, this).numerator,
+                    mcm(number, this).denominator);
         }
     }
 
-    public Number multiply(Number numberA, Number numberB) {
+    public static Number multiply(Number numberA, Number numberB) {
         Number result = new Number(numberA.numerator * numberB.numerator, numberA.denominator * numberB.denominator);
         result.reduce();
         return result;
@@ -66,7 +66,7 @@ public class Number {
         return new int[]{2, 3, 4, 5, 7, 11, 13, 17, 19, 23, 25};
     }
 
-    public Number minimoComunMultiplo(Number firstNumber, Number secondNumber) {
+    public Number mcm(Number firstNumber, Number secondNumber) {
         return new Number(
                 firstNumber.numerator * secondNumber.denominator,
                 firstNumber.denominator * secondNumber.denominator);
